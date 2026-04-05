@@ -17,6 +17,7 @@ export interface User {
   location: string;
   stats: {
     profileVisitors: number;
+    
     resumeViewers: number;
     myJobs: number;
   };
