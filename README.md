@@ -1,6 +1,6 @@
 # 💼 DreamJob — Job Finding Dashboard
 
-> **Next.js 14 (App Router) + Tailwind CSS v4** ke saath bana hua ek production-grade Job Dashboard.
+> **A production-grade Job Dashboard built with Next.js 14 (App Router) + Tailwind CSS v4.**
 
 ---
 
@@ -8,12 +8,12 @@
 
 ```
 DREAMJOB/
-├── 📦 node_modules/                  # npm packages (git mein nahi aata)
+├── 📦 node_modules/                  # npm packages (not included in git)
 ├── 🌐 public/                        # Static assets (images, logos, icons)
 │
 └── 📂 src/
     ├── 📂 app/                       # Next.js App Router — Pages & Layouts
-    │   ├── 📂 (dashboard)/           # Route Group — URL mein nahi dikhta
+    │   ├── 📂 (dashboard)/           # Route Group — not visible in URL
     │   │   ├── 📂 find-jobs/         # /find-jobs route
     │   │   │   └── 📄 page.tsx       # Find Jobs main page
     │   │   └── 📄 layout.tsx         # Dashboard layout (Navbar + Sidebar shared)
@@ -41,35 +41,35 @@ DREAMJOB/
 ├── 📄 next.config.ts                 # Next.js configuration
 ├── 📄 package-lock.json              # Exact dependency versions (lock file)
 ├── 📄 package.json                   # Project metadata & scripts
-├── 📄 postcss.config.mjs             # PostCSS config (Tailwind ke liye)
-└── 📄 README.md                      # Yeh file! Project documentation
+├── 📄 postcss.config.mjs             # PostCSS config (required for Tailwind)
+└── 📄 README.md                      # This file! Project documentation
 ```
 
 ---
 
-## 🗂️ Har File ka Kaam (Detail mein)
+## 🗂️ Purpose of Each File (In Detail)
 
 ### `src/app/` — Pages & Routing
 
-| File | Route | Kaam |
-|------|-------|------|
-| `app/page.tsx` | `/` | Home page — dashboard par redirect karta hai |
+| File | Route | Purpose |
+|------|-------|---------|
+| `app/page.tsx` | `/` | Home page — redirects to dashboard |
 | `app/layout.tsx` | Global | Root HTML shell, Google Fonts import, metadata |
-| `app/(dashboard)/layout.tsx` | Dashboard | Navbar + Sidebar shared layout — har dashboard page par lagta hai |
+| `app/(dashboard)/layout.tsx` | Dashboard | Shared Navbar + Sidebar layout — applied to every dashboard page |
 | `app/(dashboard)/find-jobs/page.tsx` | `/find-jobs` | Job listings page — search, filter, featured/recommended jobs |
 
-> **Note:** `(dashboard)` folder ka naam brackets mein hai isliye yeh URL mein **nahi** aata. `/find-jobs` direct kaam karta hai.
+> **Note:** The `(dashboard)` folder name is in brackets, so it does **not** appear in the URL. `/find-jobs` works directly.
 
 ---
 
 ### `src/components/dashboard/` — Dashboard Components
 
 #### `job-card.tsx`
-Ek single job listing ka card component.
+A card component for a single job listing.
 ```tsx
 <JobCard job={job} variant="featured" />
 ```
-- Job title, company, location dikhata hai
+- Displays job title, company, and location
 - "Apply Now" button
 - Bookmark icon
 - Job type badge (Remote / On-site / Hybrid)
@@ -80,21 +80,21 @@ Top navigation bar.
 - User avatar + notifications
 
 #### `profile-card.tsx`
-Left sidebar mein user profile widget.
+User profile widget in the left sidebar.
 - User photo, name, role
 - Applied jobs count
 - Saved jobs count
 
 #### `sidebar.tsx`
 Left sidebar navigation links.
-- Navigation items `constants/navigation.ts` se aate hain
+- Navigation items are pulled from `constants/navigation.ts`
 - Active link highlight
 
 ---
 
 ### `src/components/ui/` — Generic UI Components
 
-Yahan generic, reusable components rakhein jo poore app mein use hon:
+Place generic, reusable components here that are used throughout the app:
 
 ```
 ui/
@@ -125,7 +125,7 @@ export const JOBS: Job[] = [
     logo: "/logos/google.svg",
     featured: true,
   },
-  // ... baaki jobs
+  // ... more jobs
 ];
 ```
 
@@ -150,13 +150,13 @@ export const NAV_ITEMS: NavItem[] = [
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-// Tailwind classes safely merge karta hai — conflicts avoid karta hai
+// Safely merges Tailwind classes — avoids conflicts
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 ```
 
-**Use kaise karein:**
+**How to use:**
 ```tsx
 <div className={cn(
   "p-4 rounded-xl border",
@@ -202,30 +202,30 @@ export interface User {
 
 ### Config Files (Root Level)
 
-| File | Kaam |
-|------|------|
+| File | Purpose |
+|------|---------|
 | `next.config.ts` | Next.js settings — image domains, redirects, env vars |
-| `postcss.config.mjs` | PostCSS — Tailwind CSS v4 ke liye zarori |
-| `next-env.d.ts` | Auto-generated TypeScript declarations — mat chhedo |
-| `package.json` | Dependencies aur npm scripts |
-| `package-lock.json` | Exact dependency lock — git mein commit karo |
+| `postcss.config.mjs` | PostCSS — required for Tailwind CSS v4 |
+| `next-env.d.ts` | Auto-generated TypeScript declarations — do not modify |
+| `package.json` | Dependencies and npm scripts |
+| `package-lock.json` | Exact dependency lock — commit this to git |
 
 ---
 
 ## 🚀 Setup & Run
 
 ```bash
-# 1. Dependencies install karein
+# 1. Install dependencies
 npm install
 
-# 2. Development server chalayein
+# 2. Start development server
 npm run dev
 # → http://localhost:3000
 
 # 3. Production build
 npm run build
 
-# 4. Production server start
+# 4. Start production server
 npm start
 ```
 
@@ -248,7 +248,7 @@ npm start
 ```
 
 ### Font
-**Plus Jakarta Sans** — `app/layout.tsx` mein Google Fonts se import kiya gaya.
+**Plus Jakarta Sans** — imported from Google Fonts in `app/layout.tsx`.
 
 ---
 
@@ -271,9 +271,9 @@ npm start
 ## 🔗 Useful npm Commands
 
 ```bash
-npm run dev          # Dev server start karein
+npm run dev          # Start dev server
 npm run build        # Production build
-npm run lint         # ESLint errors check
+npm run lint         # Check ESLint errors
 ```
 
 ---
